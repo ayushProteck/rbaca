@@ -6,6 +6,9 @@
 ## For starting metro bundler
 > **npm start** or **npx expo start**
 
+## Checks your project for common issues and suggests fixes
+> npx expo doctor
+
 ## For showing connected devices in android
 > Press shift + a
 
@@ -68,3 +71,9 @@
 
 ## For building android application for developement locally
 > eas build --platform android --profile developement --local
+
+## Submits your built app to app stores
+> npx eas submit
+
+## Deploys over-the-air updates to your app
+> npx eas update
