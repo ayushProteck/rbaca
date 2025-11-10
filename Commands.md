@@ -14,7 +14,7 @@
 
 # For developing app locally 
 > npx expo prebuild
-
+### --> This makes it to setup android and ios file locally for the project.
 # Setting up eas for create app builds with eas
 
 ## Installing eas-cli
