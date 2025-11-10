@@ -6,6 +6,12 @@
 ## For starting metro bundler
 > **npm start** or **npx expo start**
 
+## For showing connected devices in android
+> Press shift + a
+
+## For showing connected devices in ios
+> Press shift + i
+
 # For developing app locally 
 > npx expo prebuild
 
