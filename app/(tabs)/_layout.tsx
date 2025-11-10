@@ -1,35 +1,65 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Drawer } from 'expo-router/drawer';
+import React, { useEffect } from 'react';
 
-import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
+import { useAuth } from '@/context/AuthContext';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { MaterialIcons } from '@expo/vector-icons';
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { useRouter } from 'expo-router';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!loading && !user) router.replace('/');
+  }, [user, loading, router]);
+  
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+      <Drawer
+        screenOptions={{
+          headerShown: false,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        >
+        <Drawer.Screen
+          name="index"
+          options={{
+            title: 'Home',
+            drawerIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          }}
+        />
+        <Drawer.Screen
+          name="explore"
+          options={{
+            title: 'Explore',
+            drawerIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          }}
+        />
+      </Drawer>
+  );
+}
+
+
+function CustomDrawerContent(props : any){
+  const { logout } = useAuth();
+  const router = useRouter();
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Logout"
+        labelStyle={{ color: "#f00" }}
+        style={{ marginTop: 20 }}
+        onPress={async () => {
+          await logout();
+          router.replace("/(auth)");
+          console.log("User logged out");
         }}
+        icon={({color}) => <MaterialIcons name="logout" size={24} color={"#f00"} />}
       />
-    </Tabs>
+    </DrawerContentScrollView>
   );
 }
