@@ -23,6 +23,10 @@
 ## Logging in eas
 ### User login with expo account in eas
 > eas login
+
+## For checking current user logged in
+> npx expo whoami
+
 ## For creating build 
 ### We need to configur our project first
 > eas build:configure
