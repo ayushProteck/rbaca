@@ -6,7 +6,10 @@
 ## For starting metro bundler
 > **npm start** or **npx expo start**
 
-# Setting up eas for create app builds
+# For developing app locally 
+> npx expo prebuild
+
+# Setting up eas for create app builds with eas
 
 ## Installing eas-cli
 > npm install -g eas-cli
@@ -14,7 +17,7 @@
 ## Logging in eas
 ### User login with expo account in eas
 > eas login
-## For creating build
+## For creating build 
 ### We need to configur our project first
 > eas build:configure
 ### it creates an eas.json file in your project
